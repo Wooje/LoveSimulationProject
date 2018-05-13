@@ -15,6 +15,7 @@ public class TextImporter : MonoBehaviour {
     //Text 줄 내용
     [TextArea]  // text 개행 적용.
     public string[] textLines;
+    public string statline;
 
     // 현재 라인을 표시하는 int 변수
     public int currentLine;
@@ -53,9 +54,13 @@ public class TextImporter : MonoBehaviour {
     IEnumerator Printing()
     {
         // ':' 문자의 인덱스를 복사 후, ':' 를 기준으로 이름과 대사를 나누고 대사는 한 글자씩 출력
-        int index = textLines[currentLine].IndexOf(":");
+        int index = textLines[currentLine].IndexOf("#");
+        int index2 = textLines[currentLine].IndexOf(":");
+
         Name.text = textLines[currentLine].Substring(0, index);
-        for (int i = index + 1; i < textLines[currentLine].Length; i++)
+        statline = textLines[currentLine].Substring(index + 1, 2);
+
+        for (int i = index2 + 1; i < textLines[currentLine].Length; i++)
         {
             Text.text += textLines[currentLine][i];
             yield return new WaitForSeconds(0.1f);
